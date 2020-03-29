@@ -10,7 +10,7 @@ class AboutWidget extends StatelessWidget {
             child: ListView(
                 padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
                 children: <Widget>[
-                  SectionCardWidget(title: 'About Me', description: 'Made by ❤. GithHug: dorozco-dev \n\n©2020 dorozco-dev. All Rights Reserved',)
+                  SectionCardWidget(title: 'About Me', description: 'Made by ❤. GitHub: dorozco-dev \n\n©2020 dorozco-dev. All Rights Reserved',)
                 ])));
   }
 }
