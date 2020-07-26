@@ -33,14 +33,14 @@ class CovidService {
 
   //En esta parte se consume otro proveedor
   Future<List<CoronavirusModel>> fetchAllCountries() async {
-    List<dynamic> data = await serviceUtil.get('https://corona.lmao.ninja/countries/');
+    List<dynamic> data = await serviceUtil.get('https://disease.sh/v3/covid-19/countries');
       List<CoronavirusModel> list = data.map((dynamic item) => CoronavirusModel.fromJson(item)).toList();
       list.sort((a, b) => a.country.toLowerCase().compareTo(b.country.toLowerCase()));
       return list;
   }
 
   Future<TotalCasesModel> fetchAllTotalice() async {
-    dynamic data = await serviceUtil.get('https://corona.lmao.ninja/all');
+    dynamic data = await serviceUtil.get('https://disease.sh/v3/covid-19/all');
     TotalCasesModel resultCases = TotalCasesModel.fromJson(data);
     return resultCases;
   }
