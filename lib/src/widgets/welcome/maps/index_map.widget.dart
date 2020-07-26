@@ -19,6 +19,7 @@ class IndexMap extends StatefulWidget {
 }
 
 class _IndexMapState extends State<IndexMap> {
+  DateTime now = DateTime.now();
   AssetsUtil assetsUtil = new AssetsUtil();
   CameraPosition _initialPosition = CameraPosition(target: LatLng(100,1));
   CovidService covidService = new CovidService();
@@ -74,7 +75,12 @@ class _IndexMapState extends State<IndexMap> {
   }
 
   changeMapMode() {
-    getJsonFile("assets/nightmode.json").then(setMapStyle);
+    getJsonFile("assets/theme_map/day.json").then(setMapStyle);
+    /*if (now.hour >= 18 && now.hour <= 24 || now.hour >= 0 && now.hour <= 6) {
+     getJsonFile("assets/theme_map/night.json").then(setMapStyle);
+    } else {
+      getJsonFile("assets/theme_map/day.json").then(setMapStyle);
+    }*/
   }
 
   Future<String> getJsonFile(String path) async {

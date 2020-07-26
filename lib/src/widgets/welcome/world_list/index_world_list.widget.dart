@@ -2,6 +2,7 @@ import 'package:covid_19/src/models/all_map.model.dart';
 import 'package:covid_19/src/services/covid.service.dart';
 import 'package:covid_19/src/utils/scree_are_size.util.dart';
 import 'package:covid_19/src/views/detail_country.view.dart';
+import 'package:covid_19/src/widgets/build_tile.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -47,51 +48,37 @@ class _IndexWorldListState extends State<IndexWorldList> {
           )
         : Column(
             children: <Widget>[
-              SizedBox(height: 30),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      'ESTADO MUNDIAL',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    )
-                  ],
-                ),
-              ),
+              SizedBox(height: 15),
               Container(
-                width: screenAwareSize(300, context),
+                width: screenAwareSize(500, context),
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 height: screenAwareSize(40, context),
-                decoration: BoxDecoration(
-                    color: Color(0xFF262626),
-                    borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(15.0),
-                        bottomLeft: Radius.circular(15.0),
-                        topLeft: Radius.circular(15.0),
-                        topRight: Radius.circular(15.0))),
                 child: TextField(
-                  style: new TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(top: 15.0),
-                    border: InputBorder.none,
-                    hintText: 'Buscar...',
-                    hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0),
-                    labelStyle: TextStyle(color: Colors.white),
-                    prefixIcon: Icon(LineIcons.search, color: Colors.grey),
+                    focusColor: Colors.black,
+                    fillColor: Colors.black,
+                    labelText: "Buscar",
+                    labelStyle: TextStyle(color: Colors.black),
+                    hintText: "Buscar",
+                    prefixIcon: Icon(LineIcons.search, color: Colors.black),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10.0),
+                      ),
+                    ),
                   ),
                   onChanged: (text) {
                     setState(() {
                       _listCountry = sampleListCountry
                           .where((r) => (r.country
-                              .toLowerCase()
-                              .contains(text.trim().toLowerCase())))
+                          .toLowerCase()
+                          .contains(text.trim().toLowerCase())))
                           .toList();
                     });
                   },
                 ),
               ),
+              SizedBox(height: 15),
               Expanded(
                 child: Container(
                   child: ListView.builder(
@@ -99,13 +86,12 @@ class _IndexWorldListState extends State<IndexWorldList> {
                     shrinkWrap: true,
                     itemCount: _listCountry.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return Card(
-                        elevation: 8.0,
-                        margin: new EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 6.0),
+                      return BuildTileWidget(
                         child: Container(
                           decoration: BoxDecoration(
-                              color: Color.fromRGBO(64, 75, 96, .9)),
+                              color: Colors.white,
+                              border: Border(top: BorderSide(width: 0.5, color: Color(0xFFFF000000)))
+                          ),
                           child: ListTile(
                               onTap: () {
                                 Navigator.push(
@@ -123,7 +109,7 @@ class _IndexWorldListState extends State<IndexWorldList> {
                                     border: new Border(
                                         right: new BorderSide(
                                             width: 1.0,
-                                            color: Colors.white24))),
+                                            color: Colors.black26))),
                                 child: CircleAvatar(
                                   backgroundImage: NetworkImage(
                                       _listCountry[index].countryInfo.flag),
@@ -132,11 +118,11 @@ class _IndexWorldListState extends State<IndexWorldList> {
                               title: Text(
                                 _listCountry[index].country,
                                 style: TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.black,
                                     fontWeight: FontWeight.bold),
                               ),
                               trailing: Icon(LineIcons.arrow_circle_o_right,
-                                  color: Colors.white, size: 30.0)),
+                                  color: Colors.black, size: 30.0)),
                         ),
                       );
                     },
